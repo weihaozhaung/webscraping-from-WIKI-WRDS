@@ -37,8 +37,6 @@ length(Files)
 storeTable <- foreach(iy = 1:length(Files),.combine = 'rbind',
                       .packages = c('tidyverse','R.utils','data.table'),.options.snow = opts)%dopar%{
 
-  
-  # 切割名稱方便儲存資訊
   dataDate <- strsplit(Files[iy], split = "-")[[1]][2] %>% as.numeric()
   dataTime <- strsplit(Files[iy], split = "-")[[1]][3]%>% as.numeric()
   dataTime <- floor(dataTime/10000) 
@@ -74,5 +72,3 @@ setwd("C:/Users/Eric/Desktop/MiaoLingProject/wiki_data/wiki_downloads")
 write.csv(storeTable, file = paste0(substr(targetYM,1,4),'-',substr(targetYM,5,6), "-wiki-page-view-numbers.csv"), row.names = F)
 
 
-
-cat("程式已執行完畢!")
